@@ -1,0 +1,8 @@
+{
+  "name": "banik-plywood-web",
+  "version": "1.0.0",
+  "description": "Static preview server for testing the website on mobile devices via local Wi-Fi",
+  "scripts": {
+    "dev": "npx http-server -a 0.0.0.0 -p 8080"
+  }
+}

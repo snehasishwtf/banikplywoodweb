@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banik Plywood</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || !savedTheme) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+    <style>
+        :root {
+            --header-height: 80px;
+            --content-bg: rgba(15, 14, 17, 0.72);
+            --bg-primary: #0f0e11;
+            --bg-secondary: transparent;
+            --bg-card: rgba(255, 255, 255, 0.15);
+            --bg-card-hover: rgba(255, 255, 255, 0.25);
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --border-color: rgba(255, 255, 255, 0.22);
+            --brand-color: #f43f5e;
+            --brand-hover: #fda4af;
+            --btn-text: #ffffff;
+            --footer-bg: rgba(0, 0, 0, 0.3);
+            --footer-text: #94a3b8;
+            --shadow-color: rgba(0, 0, 0, 0.35);
+            --transition-speed: 0.3s;
+            --map-bg: rgba(0, 0, 0, 0.2);
+            --map-text: #cbd5e1;
+            --fevicol-opacity: 0.12;
+            --fevicol-filter: grayscale(1) brightness(0.7) invert(1);
+            --laminates-opacity: 0.08;
+            --laminates-filter: brightness(0.6) invert(1);
+            --blockboard-opacity: 0.08;
+            --blockboard-filter: brightness(0.6) invert(1);
+            --plywood-opacity: 0.08;
+            --plywood-filter: brightness(0.6) invert(1);
+            --hero-overlay: rgba(0, 0, 0, 0.55);
+            --wa-filter: none;
+        }
+
+        html.dark {
+            --content-bg: rgba(15, 14, 17, 0.82);
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.09);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --brand-color: #f43f5e;
+            --brand-hover: #fda4af;
+            --btn-text: #ffffff;
+            --footer-bg: rgba(0, 0, 0, 0.4);
+            --footer-text: #64748b;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --fevicol-filter: grayscale(1) brightness(0.4) invert(1);
+            --laminates-filter: grayscale(0.6) brightness(0.4) invert(1);
+            --blockboard-filter: grayscale(0.6) brightness(0.4) invert(1);
+            --plywood-filter: grayscale(0.6) brightness(0.4) invert(1);
+            --hero-overlay: rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at 80% 20%, #450a12 0%, #110f11 60%, #080809 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+
+        header {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 0 50px;
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background var(--transition-speed) ease, border-bottom var(--transition-speed) ease, height var(--transition-speed) ease;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--brand-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+            transition: border-color var(--transition-speed) ease, background var(--transition-speed) ease;
+        }
+
+        .theme-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .theme-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            position: absolute;
+        }
+
+        html.dark .sun-icon {
+            transform: scale(1) rotate(0);
+            opacity: 1;
+        }
+
+        html.dark .moon-icon {
+            transform: scale(0) rotate(-90deg);
+            opacity: 0;
+        }
+
+        .sun-icon {
+            transform: scale(0) rotate(90deg);
+            opacity: 0;
+        }
+
+        .moon-icon {
+            transform: scale(1) rotate(0);
+            opacity: 1;
+        }
+
+        @keyframes fadeImage1 {
+
+            0%,
+            25% {
+                opacity: 0;
+            }
+
+            33.33%,
+            58% {
+                opacity: 1;
+            }
+
+            66.66%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeImage2 {
+
+            0%,
+            58% {
+                opacity: 0;
+            }
+
+            66.66%,
+            91% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes textPhaseH1 {
+
+            0%,
+            25% {
+                color: var(--text-primary);
+                text-shadow: none;
+            }
+
+            33.33%,
+            91% {
+                color: #ffffff;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            }
+
+            100% {
+                color: var(--text-primary);
+                text-shadow: none;
+            }
+        }
+
+        @keyframes textPhaseP {
+
+            0%,
+            25% {
+                color: var(--text-secondary);
+                text-shadow: none;
+            }
+
+            33.33%,
+            91% {
+                color: #f8fafc;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+            }
+
+            100% {
+                color: var(--text-secondary);
+                text-shadow: none;
+            }
+        }
+
+        .hero {
+            position: sticky;
+            top: var(--header-height);
+            z-index: 1;
+            background-color: transparent;
+            text-align: center;
+            padding: 100px 20px;
+            transition: background-color var(--transition-speed) ease;
+            overflow: hidden;
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            background-image: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('retailstorefront.jpg');
+            animation: fadeImage1 15s infinite;
+        }
+
+        .hero::after {
+            background-image: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('retailstorefrontnormal.jpg');
+            animation: fadeImage2 15s infinite;
+        }
+
+        .hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            background: rgba(244, 63, 94, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 24px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.15);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .btn:hover {
+            background: rgba(244, 63, 94, 0.3);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(244, 63, 94, 0.35);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            background: var(--content-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-top: 1px solid var(--border-color);
+            border-radius: 32px 32px 0 0;
+            box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.4);
+            margin-top: -32px;
+        }
+
+        .section {
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform 0.3s ease;
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--brand-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .fevicol-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fevicol-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("https://assets.pidilite.com/is/image/pidilite/fevicol-final-Logo?ts=1712908681835&dpr=off");
+            background-repeat: repeat;
+            background-position: center;
+            background-size: 140px auto;
+            opacity: var(--fevicol-opacity);
+            filter: var(--fevicol-filter);
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease, filter var(--transition-speed) ease;
+        }
+
+        .fevicol-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .laminates-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .laminates-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("decorativelaminates.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: var(--laminates-opacity);
+            filter: var(--laminates-filter);
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease, filter var(--transition-speed) ease;
+        }
+
+        .laminates-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blockboard-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blockboard-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("blockboard.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: var(--blockboard-opacity);
+            filter: var(--blockboard-filter);
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease, filter var(--transition-speed) ease;
+        }
+
+        .blockboard-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .plywood-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plywood-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("Plywood.webp");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            opacity: var(--plywood-opacity);
+            filter: var(--plywood-filter);
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease, filter var(--transition-speed) ease;
+        }
+
+        .plywood-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto 0 auto;
+            text-align: left;
+            align-items: stretch;
+        }
+
+        .contact-info {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform 0.3s ease;
+        }
+
+        .contact-info:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .contact-info h3 {
+            margin-top: 0;
+            color: var(--brand-color);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            transition: color var(--transition-speed) ease;
+        }
+
+        .phone-link-wrapper {
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 12px;
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .phone-link-wrapper:hover {
+            background: rgba(244, 63, 94, 0.24);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(244, 63, 94, 0.2);
+        }
+
+        .phone-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .phone-link:hover {
+            color: var(--brand-hover);
+            text-decoration: none;
+        }
+
+        .wa-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wa-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: var(--wa-filter);
+            transition: filter var(--transition-speed) ease, transform 0.2s ease;
+        }
+
+        .wa-link:hover .wa-icon {
+            transform: scale(1.15);
+        }
+
+        .map {
+            flex: 1.2;
+            background: var(--bg-card);
+            display: flex;
+            flex-direction: column;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        .map:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                gap: 30px;
+                padding: 0 15px;
+            }
+
+            .contact-info,
+            .map {
+                width: 100%;
+                box-sizing: border-box;
+                flex: none;
+            }
+        }
+
+        .map iframe {
+            flex-grow: 1;
+            border-radius: 12px;
+            min-height: 230px;
+        }
+
+        .share-btn {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+            width: 100%;
+        }
+
+        .share-btn:hover {
+            background-color: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .brand-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease, filter var(--transition-speed) ease;
+            opacity: 0;
+        }
+
+        .brand-card h3 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+            transition: color var(--transition-speed) ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-card p {
+            margin: 8px 0 0 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .brand-logo-img {
+            max-height: 45px;
+            margin-top: 15px;
+            object-fit: contain;
+            transition: filter var(--transition-speed) ease, opacity var(--transition-speed) ease;
+            position: relative;
+            z-index: 1;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        .brand-logo-greenply {
+            max-height: 58px;
+            margin-top: 10px;
+        }
+
+        .brand-logo-aica {
+            max-height: 28px;
+            margin-top: 20px;
+        }
+
+
+        /* Brand Specific Colors & Backgrounds */
+
+        /* CenturyPly */
+        .brand-centuryply {
+            border-top: 4px solid #a6192e;
+        }
+
+        .brand-centuryply::before {
+            background-image: url("Plywood.webp");
+            opacity: 0.08;
+            filter: var(--plywood-filter);
+        }
+
+        .brand-centuryply:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(166, 25, 46, 0.2);
+            border-color: #a6192e;
+        }
+
+        /* AICA */
+        .brand-aica {
+            border-top: 4px solid #ff5252;
+        }
+
+        .brand-aica::before {
+            background-image: url("decorativelaminates.png");
+            opacity: 0.08;
+            filter: var(--laminates-filter);
+        }
+
+        .brand-aica:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(255, 82, 82, 0.2);
+            border-color: #ff5252;
+        }
+
+        /* Greenply */
+        .brand-greenply {
+            border-top: 4px solid #198754;
+        }
+
+        .brand-greenply::before {
+            background-image: url("Plywood.webp");
+            opacity: 0.08;
+            filter: var(--plywood-filter);
+        }
+
+        .brand-greenply:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(25, 135, 84, 0.2);
+            border-color: #198754;
+        }
+
+        /* Fevicol */
+        .brand-fevicol {
+            border-top: 4px solid #0a58ca;
+        }
+
+        .brand-fevicol::before {
+            background-image: url("fevicol-final-Logo.avif");
+            background-repeat: repeat;
+            background-size: 100px auto;
+            background-position: center;
+            opacity: var(--fevicol-opacity);
+            filter: var(--fevicol-filter);
+        }
+
+        .brand-fevicol:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(10, 88, 202, 0.2);
+            border-color: #0a58ca;
+        }
+
+        /* Advance */
+        .brand-advance {
+            border-top: 4px solid #fd7e14;
+        }
+
+        .brand-advance::before {
+            background-image: url("decorativelaminates.png");
+            opacity: 0.08;
+            filter: var(--laminates-filter);
+        }
+
+        .brand-advance:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(253, 126, 20, 0.2);
+            border-color: #fd7e14;
+        }
+
+        /* Virgo Group */
+        .brand-virgogroup {
+            border-top: 4px solid #ec4899;
+        }
+
+        .brand-virgogroup::before {
+            background-image: url("decorativelaminates.png");
+            opacity: 0.08;
+            filter: var(--laminates-filter);
+        }
+
+        .brand-virgogroup:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.2);
+            border-color: #ec4899;
+        }
+
+        /* Skydecor */
+        .brand-skydecor {
+            border-top: 4px solid #64b5f6;
+        }
+
+        .brand-skydecor::before {
+            background-image: url("decorativelaminates.png");
+            opacity: 0.08;
+            filter: var(--laminates-filter);
+        }
+
+        .brand-skydecor:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(100, 181, 246, 0.2);
+            border-color: #64b5f6;
+        }
+
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-phone {
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            color: #ffffff !important;
+            text-decoration: none;
+            background: rgba(244, 63, 94, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 7px 17px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.15);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+        }
+
+        .header-phone:hover {
+            background: rgba(244, 63, 94, 0.3);
+            border-color: rgba(255, 255, 255, 0.35);
+            color: #ffffff !important;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(244, 63, 94, 0.35);
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --header-height: 56px;
+            }
+
+            header {
+                padding: 0 12px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .logo {
+                font-size: 21px;
+                white-space: nowrap;
+                letter-spacing: 0.5px;
+            }
+
+            .header-right {
+                gap: 10px;
+            }
+
+            .header-phone {
+                font-size: 11px;
+                padding: 3px 8px;
+                gap: 4px;
+            }
+
+            .header-phone svg {
+                width: 10px;
+                height: 10px;
+            }
+
+            .theme-btn {
+                width: 36px;
+                height: 36px;
+            }
+
+            .theme-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .hero {
+                padding: 60px 15px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">BANIK PLYWOOD<sup>&trade;</sup></div>
+        <div class="header-right">
+            <a href="tel:+919830161900" class="header-phone" onclick="handlePhoneClick(event, '+91 98301 61900')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                    </path>
+                </svg>
+                +91 98301 61900
+            </a>
+            <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Quality Plywood, Block Board & Flush Doors</h1>
+        <p>Your trusted authorized dealer in Belgharia, Kolkata for Plywood, MDF, WPC, Laminates, and Louvers.</p>
+        <a href="#contact" class="btn">Get Directions & Contact Us</a>
+    </div>
+
+    <main class="content-wrapper">
+
+        <div class="section">
+            <h2>Our Core Products</h2>
+            <p>Featuring premium materials from CenturyPly, AICA, Greenply, and Fevicol.</p>
+            <div class="grid">
+                <div class="card plywood-card">
+                    <h3>Plywood, MDF & WPC</h3>
+                    <p>MR, BWP, BWR grade plywood, MDF, and WPC boards for all residential and commercial needs.</p>
+                </div>
+                <div class="card blockboard-card">
+                    <h3>Block Boards, Doors & Louvers</h3>
+                    <p>Strong and durable flush doors, block boards, and architectural/decorative louvers.</p>
+                </div>
+                <div class="card laminates-card">
+                    <h3>Laminates, PVC & Acrylic</h3>
+                    <p>Wide variety of Sunmica, PVC Laminates, Acrylic Laminates, and Designer sheets.</p>
+                </div>
+                <div class="card fevicol-card">
+                    <h3>Adhesives & Glues</h3>
+                    <p>Complete Fevicol range including SH, Marine, Hi-Per, HeatX, Probond, Nail Free Ultra, and
+                        Fevikwik
+                        420.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>The Brands We Work With</h2>
+            <p>We are authorized dealers and stockists for India's leading woodware and adhesive brands.</p>
+            <div class="brand-grid">
+                <div class="brand-card brand-centuryply">
+                    <h3>CenturyPly</h3>
+                    <p>Plywood, Blockboards & Flush Doors</p>
+                    <img src="centuryply.png" alt="CenturyPly Logo" class="brand-logo-img">
+                </div>
+                <div class="brand-card brand-aica">
+                    <h3>AICA</h3>
+                    <p>Premium Sunmica & Decorative Laminates</p>
+                    <img src="AICAlogo.png" alt="AICA Logo" class="brand-logo-img brand-logo-aica">
+                </div>
+                <div class="brand-card brand-greenply">
+                    <h3>Greenply</h3>
+                    <p>Eco-Friendly Plywood & Structural Boards</p>
+                    <img src="greenply.png" alt="Greenply Logo" class="brand-logo-img brand-logo-greenply">
+                </div>
+                <div class="brand-card brand-fevicol">
+                    <h3>Fevicol</h3>
+                    <p>Adhesives, Sealants & Wood Glues</p>
+                    <img src="fevicol-logo.png" alt="Fevicol Logo" class="brand-logo-img">
+                </div>
+                <div class="brand-card brand-advance">
+                    <h3>Advance</h3>
+                    <p>PVC, Acrylic & Designer Laminates</p>
+                    <img src="advancelamlogo.png" alt="Advance Laminates Logo" class="brand-logo-img">
+                </div>
+                <div class="brand-card brand-virgogroup">
+                    <h3>Virgo Group</h3>
+                    <p>Premium Sunmica & Decorative Laminates</p>
+                    <img src="virgogrouplogo.webp" alt="Virgo Group Logo" class="brand-logo-img">
+                </div>
+                <div class="brand-card brand-skydecor">
+                    <h3>Skydecor</h3>
+                    <p>PVC, Acrylic & Decorative Laminates</p>
+                    <img src="skydecor.png" alt="Skydecor Logo" class="brand-logo-img">
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Visit Our Store</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Details</h3>
+                    <p><strong>Address:</strong><br>15/3, M. B. Road<br>Belgharia, Kolkata - 700 056</p>
+                    <div class="phone-container"
+                        style="margin-top: 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary); transition: color var(--transition-speed) ease;">
+                        <strong style="color: var(--text-primary);">Phone:</strong>
+                        <div class="phone-link-wrapper">
+                            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" style="opacity: 0.85; color: var(--brand-hover);">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <a href="tel:+919830161900" class="phone-link"
+                                onclick="handlePhoneClick(event, '+91 98301 61900')">+91 98301 61900</a>
+                            <a href="https://wa.me/919830161900" target="_blank" class="wa-link"
+                                title="Chat on WhatsApp">
+                                <img src="whatsapp.png" alt="WhatsApp" class="wa-icon">
+                            </a>
+                        </div>
+                        <div class="phone-link-wrapper">
+                            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" style="opacity: 0.85; color: var(--brand-hover);">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <a href="tel:+917059682037" class="phone-link"
+                                onclick="handlePhoneClick(event, '+91 70596 82037')">+91 70596 82037</a>
+                            <a href="https://wa.me/917059682037" target="_blank" class="wa-link"
+                                title="Chat on WhatsApp">
+                                <img src="whatsapp.png" alt="WhatsApp" class="wa-icon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="map">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Banik%20Plywood,%2015/3,%20M.%20B.%20Road,%20Belgharia,%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0">
+                    </iframe>
+                    <button onclick="shareLocation()" class="share-btn">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-5.368m0 5.368l5.6 3.11m-5.6-8.478l5.6-3.11m5.6 3.11a3 3 0 110-5.368 3 3 0 010 5.368zm0 11.736a3 3 0 110-5.368 3 3 0 010 5.368z">
+                            </path>
+                        </svg>
+                        Share Location
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <footer>
+            GSTIN: 19AEAPB1273N1ZJ | &copy; 2026 Banik Plywood. All Rights Reserved.
+        </footer>
+
+    </main>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        function copyTextToClipboard(text, successMessage) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(successMessage);
+                }).catch(err => {
+                    fallbackCopyText(text, successMessage);
+                });
+            } else {
+                fallbackCopyText(text, successMessage);
+            }
+        }
+
+        function fallbackCopyText(text, successMessage) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    alert(successMessage);
+                } else {
+                    prompt("Copy the following link:", text);
+                }
+            } catch (err) {
+                prompt("Copy the following link:", text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function handlePhoneClick(event, phoneNumber) {
+            const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            if (!isMobile) {
+                event.preventDefault();
+                copyTextToClipboard(phoneNumber, 'Phone number ' + phoneNumber + ' copied to clipboard!');
+            }
+        }
+
+        function shareLocation() {
+            const shareData = {
+                title: 'Banik Plywood',
+                text: 'Check out Banik Plywood at 15/3, M. B. Road, Belgharia, Kolkata',
+                url: 'https://maps.google.com/?q=Banik+Plywood,+15/3,+M.+B.+Road,+Belgharia,+Kolkata'
+            };
+
+            const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Trigger the native Android/iOS share sheet (navigator.share) on mobile devices.
+            // NOTE: Native sharing is a restricted web API. It requires a secure context (HTTPS)
+            // or localhost. When testing on mobile via local network HTTP (e.g. 192.168.x.x), 
+            // the mobile browser disables navigator.share and falls back to copy-to-clipboard.
+            if (isMobile && navigator.share) {
+                navigator.share(shareData).catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Error sharing:', err);
+                    }
+                });
+            } else {
+                copyTextToClipboard(shareData.url, 'Google Maps link copied to clipboard!');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
