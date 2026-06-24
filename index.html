@@ -488,7 +488,8 @@
             transition: color var(--transition-speed) ease;
         }
 
-        .phone-link-wrapper {
+        .phone-link-wrapper,
+        .email-link-wrapper {
             display: inline-flex;
             align-items: center;
             align-self: flex-start;
@@ -504,14 +505,16 @@
             transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
         }
 
-        .phone-link-wrapper:hover {
+        .phone-link-wrapper:hover,
+        .email-link-wrapper:hover {
             background: rgba(244, 63, 94, 0.24);
             border-color: rgba(255, 255, 255, 0.3);
             transform: translateY(-1px);
             box-shadow: 0 6px 16px rgba(244, 63, 94, 0.2);
         }
 
-        .phone-link {
+        .phone-link,
+        .email-link {
             color: #ffffff;
             text-decoration: none;
             font-weight: 600;
@@ -519,7 +522,8 @@
             transition: color var(--transition-speed) ease;
         }
 
-        .phone-link:hover {
+        .phone-link:hover,
+        .email-link:hover {
             color: var(--brand-hover);
             text-decoration: none;
         }
@@ -836,8 +840,6 @@
             white-space: nowrap;
             color: #ffffff !important;
             text-decoration: none;
-            background: rgba(244, 63, 94, 0.16);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 7px 17px;
@@ -846,6 +848,8 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            background: rgba(244, 63, 94, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: 0 4px 12px rgba(244, 63, 94, 0.15);
             transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
         }
@@ -856,6 +860,32 @@
             color: #ffffff !important;
             transform: translateY(-1px);
             box-shadow: 0 6px 16px rgba(244, 63, 94, 0.35);
+        }
+
+        .header-gallery-btn {
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            color: var(--text-secondary) !important;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        .header-gallery-btn:hover {
+            color: var(--brand-hover) !important;
+            transform: translateY(-1px);
+        }
+
+        .header-gallery-btn svg {
+            transition: stroke var(--transition-speed) ease;
+        }
+
+        .header-gallery-btn:hover svg {
+            stroke: var(--brand-hover);
         }
 
         @media (max-width: 600px) {
@@ -883,11 +913,21 @@
 
             .header-phone {
                 font-size: 11px;
-                padding: 3px 8px;
+                padding: 4px 10px;
                 gap: 4px;
             }
 
             .header-phone svg {
+                width: 10px;
+                height: 10px;
+            }
+
+            .header-gallery-btn {
+                font-size: 11px;
+                gap: 4px;
+            }
+
+            .header-gallery-btn svg {
                 width: 10px;
                 height: 10px;
             }
@@ -914,6 +954,237 @@
                 font-size: 15px;
             }
         }
+
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .gallery-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, transform 0.3s ease, box-shadow var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .gallery-img-wrapper {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-card:hover .gallery-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(244, 63, 94, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay svg {
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            transform: scale(0.8);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .gallery-card:hover .gallery-overlay svg {
+            transform: scale(1);
+        }
+
+        .gallery-card h4 {
+            margin: 12px 0 4px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            transition: color var(--transition-speed) ease;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(10, 9, 12, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content-wrapper {
+            position: relative;
+            max-width: 90%;
+            max-height: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content-wrapper img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            object-fit: contain;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .lightbox.show img {
+            transform: scale(1);
+        }
+
+        #lightbox-caption {
+            margin-top: 16px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            z-index: 10001;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-close:hover {
+            color: var(--brand-color);
+            transform: rotate(90deg) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 16px 20px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50%;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            z-index: 10000;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--brand-color);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .lightbox-prev {
+            left: 32px;
+        }
+
+        .lightbox-next {
+            right: 32px;
+        }
+
+        @media (max-width: 768px) {
+
+            .lightbox-prev,
+            .lightbox-next {
+                padding: 10px 14px;
+                font-size: 18px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .lightbox-prev {
+                left: 12px;
+            }
+
+            .lightbox-next {
+                right: 12px;
+            }
+
+            .lightbox-close {
+                top: 12px;
+                right: 12px;
+                width: 40px;
+                height: 40px;
+                font-size: 32px;
+            }
+        }
     </style>
 </head>
 
@@ -922,6 +1193,7 @@
     <header>
         <div class="logo">BANIK PLYWOOD<sup>&trade;</sup></div>
         <div class="header-right">
+
             <a href="tel:+919830161900" class="header-phone" onclick="handlePhoneClick(event, '+91 98301 61900')">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                     stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1027,6 +1299,134 @@
             </div>
         </div>
 
+        <div class="section" id="gallery">
+            <h2>Our Certificates & Gallery</h2>
+            <p>We are fully authorized and certified dealers for India's leading woodware and adhesive brands.</p>
+            <div class="gallery-grid">
+                <div class="gallery-card" onclick="openLightbox(0)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/pidilitecert.jpg" alt="Pidilite / Fevicol Authorized Dealer"
+                            loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Pidilite / Fevicol Authorized Dealer</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(1)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/greencert.jpg" alt="Greenply Authorized Dealer" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Greenply Authorized Dealer</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(2)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/aicacert.jpg" alt="AICA Authorized Dealer" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>AICA Authorized Dealer</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(3)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/aicacert2.jpg" alt="AICA Partnership Certificate" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>AICA Partnership Certificate</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(4)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/advancecert.jpg" alt="Advance Laminates Dealer" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Advance Laminates Dealer</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(5)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/virgocert.jpg" alt="Virgo Group Dealer" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Virgo Group Dealer</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(6)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/IMG_20260624_142815.jpg" alt="Authorized Dealership" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Authorized Dealership</h4>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(7)">
+                    <div class="gallery-img-wrapper">
+                        <img src="Gallery of Certs/IMG_20260624_142834.jpg" alt="Authorized Distributor" loading="lazy">
+                        <div class="gallery-overlay">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h4>Authorized Distributor</h4>
+                </div>
+            </div>
+        </div>
+
         <div class="section" id="contact">
             <h2>Visit Our Store</h2>
             <div class="contact-container">
@@ -1067,12 +1467,26 @@
                             </a>
                         </div>
                     </div>
+                    <div class="email-container"
+                        style="margin-top: 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary); transition: color var(--transition-speed) ease;">
+                        <strong style="color: var(--text-primary);">Email:</strong>
+                        <div class="email-link-wrapper">
+                            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg" style="opacity: 0.85; color: var(--brand-hover);">
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                            </svg>
+                            <a href="mailto:contact.banikplywood@gmail.com"
+                                class="email-link">contact.banikplywood@gmail.com</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="map">
                     <iframe
                         src="https://maps.google.com/maps?q=Banik%20Plywood,%2015/3,%20M.%20B.%20Road,%20Belgharia,%20Kolkata&t=&z=15&ie=UTF8&iwloc=&output=embed"
                         width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""
-                        aria-hidden="false" tabindex="0">
+                        aria-hidden="false" loading="lazy">
                     </iframe>
                     <button onclick="shareLocation()" class="share-btn">
                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1090,10 +1504,21 @@
 
 
         <footer>
-             &copy; 2026 Banik Plywood. All Rights Reserved.
+            &copy; 2026 Banik Plywood. All Rights Reserved.
         </footer>
 
     </main>
+
+    <!-- Lightbox Modal -->
+    <div id="gallery-lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+        <button class="lightbox-prev" onclick="prevLightboxImage(event)" aria-label="Previous image">&#10094;</button>
+        <div class="lightbox-content-wrapper">
+            <img id="lightbox-img" src="" alt="Fullscreen Certificate">
+            <div id="lightbox-caption">Caption</div>
+        </div>
+        <button class="lightbox-next" onclick="nextLightboxImage(event)" aria-label="Next image">&#10095;</button>
+    </div>
 
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
@@ -1167,6 +1592,84 @@
                 copyTextToClipboard(shareData.url, 'Google Maps link copied to clipboard!');
             }
         }
+
+        /* Gallery Lightbox JS */
+        const galleryImages = [
+            { src: 'Gallery of Certs/pidilitecert.jpg', title: 'Pidilite / Fevicol Authorized Dealer' },
+            { src: 'Gallery of Certs/greencert.jpg', title: 'Greenply Authorized Dealer' },
+            { src: 'Gallery of Certs/aicacert.jpg', title: 'AICA Authorized Dealer' },
+            { src: 'Gallery of Certs/aicacert2.jpg', title: 'AICA Partnership Certificate' },
+            { src: 'Gallery of Certs/advancecert.jpg', title: 'Advance Laminates Dealer' },
+            { src: 'Gallery of Certs/virgocert.jpg', title: 'Virgo Group Dealer' },
+            { src: 'Gallery of Certs/IMG_20260624_142815.jpg', title: 'Authorized Dealership' },
+            { src: 'Gallery of Certs/IMG_20260624_142834.jpg', title: 'Authorized Distributor' }
+        ];
+
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('gallery-lightbox');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+
+            img.src = galleryImages[index].src;
+            caption.innerText = galleryImages[index].title;
+
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'gallery-lightbox' || event.target.classList.contains('lightbox-close')) {
+                const lightbox = document.getElementById('gallery-lightbox');
+                lightbox.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function prevLightboxImage(event) {
+            if (event) event.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            img.src = galleryImages[currentImageIndex].src;
+            caption.innerText = galleryImages[currentImageIndex].title;
+        }
+
+        // Keyboard navigation support & arrow navigations
+        function nextLightboxImage(event) {
+            if (event) event.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            img.src = galleryImages[currentImageIndex].src;
+            caption.innerText = galleryImages[currentImageIndex].title;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('gallery-lightbox');
+            if (lightbox && lightbox.classList.contains('show')) {
+                if (e.key === 'Escape') {
+                    lightbox.classList.remove('show');
+                    document.body.style.overflow = '';
+                } else if (e.key === 'ArrowLeft') {
+                    prevLightboxImage();
+                } else if (e.key === 'ArrowRight') {
+                    nextLightboxImage();
+                }
+            }
+        });
+
+        // Force browser to load the page from the top and disable automatic scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+        window.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+        });
     </script>
 
 </body>
